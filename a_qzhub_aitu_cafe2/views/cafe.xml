@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="view_cafe_kanban" model="ir.ui.view">
+        <field name="name">cafe.admin.kanban</field>
+        <field name="model">cafe.admin</field>
+        <field name="arch" type="xml">
+            <kanban>
+                <field name="id"/>
+                <field name="cafename"/>
+                <field name="adminname"/>
+                <field name="address"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <ul style="list-style-type: none;">
+                            <li>
+                                <h3>
+                                    <field name="cafename"/>
+                                </h3>
+                            </li>
+                            <group>
+                                <li style="color:#BD5B92;">
+                                    <field name="adminname"/>
+                                </li>
+                                <li>
+                                    <field name="address"/>
+                                </li>
+                            </group>
+                        </ul>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record id="cafe_tree" model="ir.ui.view">
+        <field name="name">cafe.admin.tree</field>
+        <field name="model">cafe.admin</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="cafename"/>
+                <field name="adminname"/>
+                <field name="address"/>
+                <field name="user_id" widget="many2one_avatar_user" optional="show"/>
+            </tree>
+        </field>
+    </record>
+
+
+    <record id="cafe_form" model="ir.ui.view">
+        <field name="name">cafe.admin.form</field>
+        <field name="model">cafe.admin</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <h1>
+                        <field name="cafename" placeholder="Cafe Name"/>
+                    </h1>
+                    <group>
+                        <field name="adminname"/>
+                        <field name="address"/>
+                    </group>
+                    <notebook>
+                        <page string="Menu for tomorrow" name="menu_tomorrow">
+                            <field name="menus_id" placeholder="e.g. Meat, salat, cola"/>
+<!--                            <tree editable="bottom">-->
+<!--                                <field name="product_first" placeholder="e.g. Суп пюре"/>-->
+<!--                                <field name="product_second" placeholder="e.g. Курица по-тайски"/>-->
+<!--                                <field name="product_salat" placeholder="e.g. Оливье"/>-->
+<!--                            </tree>-->
+
+<!--                            <field name="menus_id" placeholder="e.g. Meat, salat, cola">-->
+<!--                                <tree editable="bottom">-->
+<!--                                    <field name="product_first" placeholder="e.g. Суп пюре"/>-->
+<!--                                    <field name="product_second" placeholder="e.g. Курица по-тайски"/>-->
+<!--                                    <field name="product_salat" placeholder="e.g. Оливье"/>-->
+<!--                                </tree>-->
+<!--                            </field>-->
+
+
+                        </page>
+                    </notebook>
+
+
+                </sheet>
+                <footer>
+                    <button string="Confirm menu" name="add_to_cart" type="object" class="oe_highlight"
+                            invisible="context.get('active_id', False)" data-hotkey="w"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="cafe_action" model="ir.actions.act_window">
+        <field name="name">Cafes</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">cafe.admin</field>
+        <field name="view_mode">kanban,tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Add new cafe
+            </p>
+            <p>
+                Amina's example module
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="cafe_root"
+              name="Cafe Lunch"
+              sequence="10"/>
+
+    <menuitem id="cafe_admin_root"
+              name="Cafes"
+              parent="cafe_root"
+              sequence="2"/>
+
+
+    <menuitem id="cafe_admin"
+              name="Cafe"
+              parent="cafe_admin_root"
+              action="cafe_action"
+              sequence="2"/>
+
+    <!--    <menuitem id="cafe_menus"-->
+    <!--              name="Menu"-->
+    <!--              parent="cafe_admin_root"-->
+    <!--              action="menus_action"-->
+    <!--              sequence="2"/>-->
+</odoo>

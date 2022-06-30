@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="client_tree" model="ir.ui.view">
+        <field name="name">client.survey.tree</field>
+        <field name="model">client.survey</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="cafename"/>
+                <field name="adminname"/>
+                <field name="address"/>
+            </tree>
+        </field>
+    </record>
+
+
+    <record id="client_form" model="ir.ui.view">
+        <field name="name">client.survey.form</field>
+        <field name="model">client.survey</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <field name="menu_lines"/>
+                    <h1>
+                        <field name="cafename" placeholder="Cafe Name"/>
+                    </h1>
+                    <group>
+                        <group>
+                            <field name="adminname"/>
+                            <field name="address"/>
+                        </group>
+                        <group>
+                            <button string="Like" name="like_menu" type="object" class="oe_highlight"
+                                    invisible="context.get('active_id', False)" data-hotkey="w"/>
+                        </group>
+                    </group>
+
+                    <notebook>
+                        <page string="Menu for tomorrow" name="menu_tomorrow">
+                            <field name="menus_choose" placeholder="e.g. Meat, salat, cola"/>
+                            <group>
+                                <field name="product_first"/>
+                                <field name="product_second"/>
+                                <field name="product_salat"/>
+                            </group>
+
+                        </page>
+                    </notebook>
+
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="client_action" model="ir.actions.act_window">
+        <field name="name">Client</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">client.survey</field>
+        <field name="view_mode">tree,kanban,form</field>
+        <field name="help" type="html">
+            <field name="menu_lines"/>
+
+            <!--            <p class="o_view_nocontent_smiling_face">-->
+            <!--                Add new cafe-->
+            <!--            </p>-->
+            <!--            <p>-->
+            <!--                Amina's example module-->
+            <!--            </p>-->
+        </field>
+    </record>
+
+
+    <menuitem id="client_menu_root"
+              name="Clients"
+              parent="cafe_root"
+              sequence="2"/>
+
+
+    <menuitem id="client_survey"
+              name="Clientsss"
+              parent="client_menu_root"
+              action="client_action"
+              sequence="2"/>
+
+</odoo>

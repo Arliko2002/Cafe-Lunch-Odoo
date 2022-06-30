@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_cafe_admin,access.cafe.admin,model_cafe_admin,,1,1,1,1
+
+access_client_survey,access.client.survey,model_client_survey,,1,1,1,1
+access_cafe_menus,access.cafe.menus,model_cafe_menus,,1,1,1,1
